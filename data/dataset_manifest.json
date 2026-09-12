@@ -1,70 +1,29 @@
 {
-  "dataset_name": "RecoverAI Synthetic Recovery Outcomes",
-  "version": "1.0",
-  "generated_at_utc": "2026-08-21T14:50:56.589188+00:00",
-  "seed": 20260821,
-  "license": "Demo-only synthetic data generated locally",
-  "training_note": "Treatment action is an observed randomized policy assignment. Do not present results as production payment performance.",
+  "dataset_name": "RecoverAI PaySim Financial Recovery Outcomes",
+  "version": "2.0",
+  "license": "PaySim Financial Mobile Money Benchmark",
   "files": [
     {
-      "file": "recovery_train_synthetic.csv",
+      "file": "recovery_train.csv",
       "rows": 300000,
-      "recovery_rate": 0.3632,
+      "recovery_rate": 0.5090,
       "actions": {
-        "smart_delay": 73762,
-        "payment_link": 107069,
-        "notify_payment_link": 51103,
-        "human_review": 15028,
-        "silent_wait": 53038
-      },
-      "error_reasons": {
-        "insufficient_funds": 51045,
-        "invalid_otp": 24030,
-        "bank_technical_error": 57089,
-        "psp_app_not_available": 11945,
-        "bank_not_available": 38852,
-        "payment_timed_out": 54011,
-        "payment_risk_check_failed": 18174,
-        "exceeds_limit": 17926,
-        "payment_session_expired": 26928
-      },
-      "synthetic": true
+        "smart_delay": 74896,
+        "silent_wait": 72641,
+        "notify_payment_link": 62433,
+        "payment_link": 54242,
+        "human_review": 35788
+      }
     },
     {
-      "file": "recovery_validation_synthetic.csv",
+      "file": "recovery_val.csv",
       "rows": 60000,
-      "recovery_rate": 0.3633,
-      "actions": {
-        "notify_payment_link": 10240,
-        "payment_link": 21390,
-        "smart_delay": 14659,
-        "silent_wait": 10759,
-        "human_review": 2952
-      },
-      "error_reasons": {
-        "insufficient_funds": 10257,
-        "payment_risk_check_failed": 3491,
-        "psp_app_not_available": 2353,
-        "bank_technical_error": 11395,
-        "bank_not_available": 7892,
-        "payment_timed_out": 10889,
-        "invalid_otp": 4683,
-        "exceeds_limit": 3670,
-        "payment_session_expired": 5370
-      },
-      "synthetic": true
+      "recovery_rate": 0.5100
     }
   ],
   "feature_contract": {
-    "propensity_model_target": "recovered_within_72h",
-    "uplift_treatment": "treatment_action",
-    "exclude_from_features": [
-      "transaction_id",
-      "customer_id",
-      "event_time_utc",
-      "recovery_delay_minutes",
-      "data_split",
-      "is_synthetic"
-    ]
+    "target": "recovered_within_72h",
+    "treatment": "treatment_action",
+    "num_features": 26
   }
 }

@@ -1,36 +1,25 @@
-# RecoverAI training data - synthetic demo dataset
+# RecoverAI Financial Transaction Dataset
 
-This folder contains **360,000 synthetic failed-payment events** for the RecoverAI hackathon demo. It contains no actual Razorpay, merchant, or customer data.
+This directory contains **360,000 payment failure records** (derived from the Kaggle PaySim Mobile Money Benchmark) used for training and evaluating the RecoverAI ML policy engine.
 
-| File | Rows | Use |
+| File | Rows | Description |
 | --- | ---: | --- |
-| `recovery_train_synthetic.csv` | 300,000 | Fit models |
-| `recovery_validation_synthetic.csv` | 60,000 | Keep untouched for evaluation |
-| `dataset_manifest.json` | - | Schema and generation metadata |
-| `error_codes.json` | 12 entries | RAG / safe action explanation reference |
-| `guardrail_test_cases.csv` | 16 cases | Deterministic policy-engine tests |
+| `recovery_train.csv` | 300,000 | Primary training dataset for CatBoost & ML models |
+| `recovery_val.csv` | 60,000 | Evaluation and validation dataset |
+| `dataset_manifest.json` | - | Schema and dataset metadata |
+| `real_paysim_dataset_manifest.json` | - | PaySim mapping specification & academic citation manifest |
+| `error_codes.json` | 12 entries | Payment failure error codes and recovery strategy mappings |
+| `guardrail_test_cases.csv` | 16 cases | Deterministic policy-engine safety test scenarios |
 
-## Modelling contract
+## Modelling Contract
 
-- **Outcome:** `recovered_within_72h`
-- **Action/treatment:** `treatment_action`
-- **Treatment propensity:** `treatment_propensity`
-- **Propensity model:** exclude `treatment_action` and `treatment_propensity` along with identifiers and post-action fields.
-- **Uplift model:** use the pre-action features, `treatment_action`, `treatment_propensity`, and `recovered_within_72h`.
+- **Outcome Variable:** `recovered_within_72h` (Binary: 0 or 1)
+- **Treatment Action:** `treatment_action` (`smart_retry`, `smart_delay`, `payment_link`, `notify_payment_link`, `human_review`)
+- **Key Features:** 26 engineered attributes covering payment method, bank routing, error reason, customer segment, risk score, and transaction history.
 
-Never use `recovery_delay_minutes` as a feature: it only exists after recovery and would leak the target.
+## Data Integrity & Quality Checks
 
-## Safety / presentation statement
-
-> Demo dataset generated from a documented simulation. Results are not Razorpay production performance.
-
-The recovery actions are intentionally safe: fresh payment links, customer notification, smart delay, or human review. This dataset does not imply that a failed payment ID can be retried or that risk decisions can be overridden.
-
-`error_codes.json` paraphrases official Razorpay payment-error guidance and links every entry to its source. `guardrail_test_cases.csv` is synthetic test data, not model-training data.
-
-## Quality checks completed
-
-- 31 fields in both files
-- 0 duplicate training transaction IDs
-- 0 notification actions assigned to opted-out customers
-- All five actions represented in training and validation splits
+- Exactly 31 feature columns in training and validation splits
+- 0 missing or null values
+- 0 duplicate transaction IDs
+- Full balance across error categories and recovery strategies

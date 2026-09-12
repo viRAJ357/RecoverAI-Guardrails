@@ -52,8 +52,15 @@ print("="*65)
 # STEP 1: Load Data
 # ─────────────────────────────────────────────────────────────────
 print("\n[1/6] Loading datasets...")
-train_df = pd.read_csv(os.path.join(BASE, "recoverai_training.csv"))
-val_df   = pd.read_csv(os.path.join(BASE, "recoverai_validation.csv"))
+train_path = os.path.join(BASE, "recovery_train.csv")
+if not os.path.exists(train_path):
+    train_path = os.path.join(BASE, "recoverai_training.csv")
+val_path = os.path.join(BASE, "recovery_val.csv")
+if not os.path.exists(val_path):
+    val_path = os.path.join(BASE, "recoverai_validation.csv")
+
+train_df = pd.read_csv(train_path)
+val_df   = pd.read_csv(val_path)
 print(f"  Train : {train_df.shape[0]:,} rows x {train_df.shape[1]} cols")
 print(f"  Val   : {val_df.shape[0]:,} rows x {val_df.shape[1]} cols")
 print(f"  Target distribution (train):")

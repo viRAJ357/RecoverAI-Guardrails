@@ -386,8 +386,8 @@ train_df = df.iloc[:TRAIN_SIZE]
 val_df   = df.iloc[TRAIN_SIZE:]
 
 # Save
-train_path = os.path.join(OUT, "recoverai_training.csv")
-val_path   = os.path.join(OUT, "recoverai_validation.csv")
+train_path = os.path.join(OUT, "recovery_train.csv")
+val_path   = os.path.join(OUT, "recovery_val.csv")
 
 train_df.to_csv(train_path, index=False)
 val_df.to_csv(val_path, index=False)

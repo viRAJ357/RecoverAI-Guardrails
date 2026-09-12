@@ -17,8 +17,8 @@
       "F1-Score"
     ],
     "benchmark_splits": {
-      "training_file": "data/recovery_train_synthetic.csv",
-      "validation_file": "data/recovery_validation_synthetic.csv"
+      "training_file": "data/recovery_train.csv",
+      "validation_file": "data/recovery_val.csv"
     }
   }
 }
