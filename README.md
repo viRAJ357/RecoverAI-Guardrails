@@ -508,7 +508,7 @@ curl -X POST http://localhost:8000/api/process-payment \
 
 ---
 
-## 👥 Team & Submission
+## 👥 Team & Project
 
 | Field | Details |
 |---|---|
@@ -516,7 +516,6 @@ curl -X POST http://localhost:8000/api/process-payment \
 | **Repository** | [github.com/viRAJ357/RecoverAI-Guardrails](https://github.com/viRAJ357/RecoverAI-Guardrails) |
 | **Model AUC** | 0.8207 |
 | **Dataset** | 300,000 training rows |
-| **Hackathon** | National Level Submission |
 | **License** | MIT |
 
 ---
@@ -525,7 +524,7 @@ curl -X POST http://localhost:8000/api/process-payment \
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,2,5,30&height=120&section=footer&animation=twinkling" width="100%"/>
 
-**Built with ❤️ for the National Level Hackathon**
+**Built with ❤️ by the RecoverAI Team**
 
 *RecoverAI — Turning failed transactions into recovered revenue.*
 
