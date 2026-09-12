@@ -6,7 +6,7 @@
 'use strict';
 
 /* ─── Config ─── */
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:8000/api' : '/api';
 const STATS_REFRESH_MS  = 30_000;
 const EVENTS_REFRESH_MS = 10_000;
 

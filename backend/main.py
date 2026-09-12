@@ -24,6 +24,8 @@ from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 # ---------------------------------------------------------------------------
@@ -421,6 +423,24 @@ async def demo_event() -> PaymentEvent:
         notification_sent=0,
     )
 
+
+# ===========================================================================
+# Serve Frontend Static Files
+# ===========================================================================
+frontend_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "frontend")
+if os.path.exists(frontend_path):
+    app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+
+    @app.get("/")
+    async def serve_index():
+        return FileResponse(os.path.join(frontend_path, "index.html"))
+
+    @app.get("/{catchall:path}")
+    async def serve_frontend_files(catchall: str):
+        file_path = os.path.join(frontend_path, catchall)
+        if os.path.isfile(file_path):
+            return FileResponse(file_path)
+        return FileResponse(os.path.join(frontend_path, "index.html"))
 
 # ===========================================================================
 # Dev entrypoint
