@@ -1,0 +1,122 @@
+[
+  {
+    "error_reason": "bank_technical_error",
+    "error_source": "gateway",
+    "safe_recovery_action": "smart_delay",
+    "recommended_delay_minutes": 15,
+    "customer_message_key": "bank_temporarily_unavailable",
+    "requires_human_review": false,
+    "notes": "Avoid repeated immediate attempts; offer a fresh payment route after the delay.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "bank_not_available",
+    "error_source": "gateway",
+    "safe_recovery_action": "smart_delay",
+    "recommended_delay_minutes": 20,
+    "customer_message_key": "bank_temporarily_unavailable",
+    "requires_human_review": false,
+    "notes": "Bank downtime is usually transient; do not treat it as a customer failure.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "psp_app_not_available",
+    "error_source": "gateway",
+    "safe_recovery_action": "payment_link",
+    "recommended_delay_minutes": 10,
+    "customer_message_key": "try_another_payment_method",
+    "requires_human_review": false,
+    "notes": "Create a fresh payment route; allow the customer to select another PSP or method.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "payment_timed_out",
+    "error_source": "gateway",
+    "safe_recovery_action": "notify_payment_link",
+    "recommended_delay_minutes": 2,
+    "customer_message_key": "resume_payment",
+    "requires_human_review": false,
+    "notes": "Send only through a consented channel and create a fresh payment link, not a raw retry.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "payment_session_expired",
+    "error_source": "customer",
+    "safe_recovery_action": "payment_link",
+    "recommended_delay_minutes": 0,
+    "customer_message_key": "start_new_payment_session",
+    "requires_human_review": false,
+    "notes": "The customer needs a new payment session.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "invalid_otp",
+    "error_source": "customer",
+    "safe_recovery_action": "payment_link",
+    "recommended_delay_minutes": 0,
+    "customer_message_key": "retry_with_correct_otp",
+    "requires_human_review": false,
+    "notes": "Do not expose OTP or ask for it in a notification.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "otp_attempts_exceeded",
+    "error_source": "customer",
+    "safe_recovery_action": "smart_delay",
+    "recommended_delay_minutes": 30,
+    "customer_message_key": "wait_before_retrying",
+    "requires_human_review": false,
+    "notes": "The customer needs to wait before a fresh payment attempt.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "insufficient_funds",
+    "error_source": "customer",
+    "safe_recovery_action": "payment_link",
+    "recommended_delay_minutes": 1440,
+    "customer_message_key": "choose_another_method_or_retry_later",
+    "requires_human_review": false,
+    "notes": "No repeated automatic retry; a link gives the customer control over method and timing.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "exceeds_limit",
+    "error_source": "customer",
+    "safe_recovery_action": "payment_link",
+    "recommended_delay_minutes": 0,
+    "customer_message_key": "choose_another_method",
+    "requires_human_review": false,
+    "notes": "Do not claim a universal UPI payment limit; show the customer available options.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "payment_risk_check_failed",
+    "error_source": "gateway",
+    "safe_recovery_action": "human_review",
+    "recommended_delay_minutes": null,
+    "customer_message_key": "payment_needs_review",
+    "requires_human_review": true,
+    "notes": "Never automatically override a bank, gateway, or Razorpay risk decision.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "payment_cancelled",
+    "error_source": "customer",
+    "safe_recovery_action": "silent_wait",
+    "recommended_delay_minutes": null,
+    "customer_message_key": "none",
+    "requires_human_review": false,
+    "notes": "The customer explicitly cancelled; do not initiate unsolicited recovery communication.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  },
+  {
+    "error_reason": "payment_failed",
+    "error_source": "gateway",
+    "safe_recovery_action": "payment_link",
+    "recommended_delay_minutes": 10,
+    "customer_message_key": "try_another_payment_method",
+    "requires_human_review": false,
+    "notes": "Use a new customer-initiated payment route rather than a blind retry.",
+    "source_url": "https://razorpay.com/docs/errors/payments/list/?preferred-country=US"
+  }
+]

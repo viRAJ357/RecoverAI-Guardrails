@@ -1,0 +1,17 @@
+case_id,payment_id,event_id,amount_paise,original_amount_paise,error_reason,risk_score,retry_count,customer_opt_out,already_recovered,duplicate_event,proposed_action,expected_decision,expected_reason,is_synthetic
+GR-001,pay_guard_001,evt_guard_001,499900,499900,payment_timed_out,0.12,0,0,0,0,payment_link,APPROVE,valid_low_risk_recovery_route,1
+GR-002,pay_guard_002,evt_guard_002,499900,499900,payment_timed_out,0.12,0,1,0,0,notify_payment_link,BLOCK,customer_opted_out,1
+GR-003,pay_guard_003,evt_guard_003,499900,499900,bank_technical_error,0.20,2,0,0,0,smart_delay,BLOCK,retry_limit_reached,1
+GR-004,pay_guard_004,evt_guard_004,6000000,6000000,exceeds_limit,0.18,0,0,0,0,payment_link,HUMAN_REVIEW,high_value_transaction,1
+GR-005,pay_guard_005,evt_guard_005,4500000,4500000,payment_risk_check_failed,0.91,0,0,0,0,payment_link,HUMAN_REVIEW,high_risk_or_risk_check_failure,1
+GR-006,pay_guard_006,evt_guard_006,499900,499900,bank_not_available,0.10,0,0,1,0,payment_link,BLOCK,payment_already_recovered,1
+GR-007,pay_guard_007,evt_guard_007,499900,499900,payment_timed_out,0.10,0,0,0,1,payment_link,BLOCK,duplicate_webhook_event,1
+GR-008,pay_guard_008,evt_guard_008,999999,499900,payment_timed_out,0.10,0,0,0,0,payment_link,BLOCK,requested_amount_exceeds_original,1
+GR-009,pay_guard_009,evt_guard_009,499900,499900,payment_cancelled,0.08,0,0,0,0,notify_payment_link,BLOCK,customer_cancelled_payment,1
+GR-010,pay_guard_010,evt_guard_010,249900,249900,invalid_otp,0.12,0,0,0,0,payment_link,APPROVE,fresh_payment_route_allowed,1
+GR-011,pay_guard_011,evt_guard_011,1250000,1250000,insufficient_funds,0.23,1,0,0,0,smart_delay,APPROVE,delayed_customer_controlled_recovery,1
+GR-012,pay_guard_012,evt_guard_012,5100000,5100000,payment_session_expired,0.14,0,0,0,0,payment_link,HUMAN_REVIEW,high_value_transaction,1
+GR-013,pay_guard_013,evt_guard_013,399900,399900,psp_app_not_available,0.16,0,0,0,0,payment_link,APPROVE,fresh_alternative_payment_route,1
+GR-014,pay_guard_014,evt_guard_014,799900,799900,bank_technical_error,0.83,0,0,0,0,smart_delay,HUMAN_REVIEW,high_risk_score,1
+GR-015,pay_guard_015,evt_guard_015,349900,349900,otp_attempts_exceeded,0.10,0,0,0,0,smart_delay,APPROVE,cooldown_before_fresh_attempt,1
+GR-016,pay_guard_016,evt_guard_016,499900,499900,payment_failed,0.19,0,1,0,0,payment_link,APPROVE,no_notification_requested,1

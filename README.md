@@ -99,141 +99,73 @@ RecoverAI predicts — within milliseconds — **whether a failed transaction wi
 - Action distribution, error distribution, guardrail rate metrics
 
 ### 🔄 CI/CD
-- GitHub Actions runs training + uploads model artefacts on every push
-- Zero-manual-step reproducibility for judges
+- GitHub Actions runs training + up## 🔷 System Workflow Architecture
 
----
+```mermaid
+flowchart TD
+    %% Styling Definitions
+    classDef blueCard fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff;
+    classDef purpleCard fill:#6d28d9,stroke:#c084fc,stroke-width:2px,color:#ffffff;
+    classDef redDiamond fill:#b91c1c,stroke:#f87171,stroke-width:2px,color:#ffffff;
+    classDef redCard fill:#991b1b,stroke:#ef4444,stroke-width:2px,color:#ffffff;
+    classDef greenCard fill:#15803d,stroke:#4ade80,stroke-width:2px,color:#ffffff;
+    classDef backendCard fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff;
+    classDef yellowCard fill:#a16207,stroke:#fde047,stroke-width:2px,color:#ffffff;
+    classDef goldCard fill:#78350f,stroke:#fbbf24,stroke-width:2px,color:#ffffff;
 
-## 🔷 3-D GSOX Motion Workflow
+    subgraph S1 ["1. Data Pipeline"]
+        A["Raw Dataset: 300k Records"]:::blueCard
+        B["Data Validation & Cleaning"]:::blueCard
+        C["Feature Engineering: 26 Features"]:::blueCard
+        D["Train / Val / Test Split"]:::blueCard
+        
+        A --> B --> C --> D
+    end
 
-The project is built around the **3-D (Data → Deploy) model** orchestrated by the **GSOX Motion Workflow** — a structured pipeline that ensures every stage is auditable, reproducible, and production-ready.
+    subgraph S2 ["2. ML Training"]
+        E["CatBoost Classifier Training\ndepth=7, lr=0.05"]:::purpleCard
+        F["Model Evaluation\nAUC: 0.8207 | Acc: 74.43%"]:::purpleCard
+        G["Trained Recovery Prediction Model"]:::purpleCard
+        
+        E --> F --> G
+    end
+    
+    D --> E
 
-```
-╔══════════════════════════════════════════════════════════════════════════╗
-║                    GSOX MOTION WORKFLOW — 3D PIPELINE                   ║
-╠══════════════╦══════════════════════╦═══════════════════════════════════╣
-║   DIMENSION  ║       STAGE          ║            GSOX MOTION            ║
-╠══════════════╬══════════════════════╬═══════════════════════════════════╣
-║              ║ Raw Data Collection  ║  G → Gather (download_datasets)   ║
-║  D1 — DATA   ║ Feature Engineering  ║  S → Structure (build_dataset)    ║
-║              ║ Train/Val Split      ║  O → Organise (300K / 60K rows)   ║
-╠══════════════╬══════════════════════╬═══════════════════════════════════╣
-║              ║ CatBoost Training    ║  G → Generate (train_catboost)    ║
-║  D2 — MODEL  ║ Guardrail Layer      ║  S → Secure (guardrails.py)       ║
-║              ║ Evaluation & Metrics ║  O → Optimise (AUC 0.82)          ║
-╠══════════════╬══════════════════════╬═══════════════════════════════════╣
-║              ║ FastAPI Server       ║  G → Gate (API endpoints)         ║
-║  D3 — DEPLOY ║ Frontend Dashboard   ║  S → Show (operator UI)           ║
-║              ║ CI/CD Pipeline       ║  O → Operate (GitHub Actions)     ║
-╚══════════════╩══════════════════════╩═══════════════════════════════════╝
-                              X → eXplain (audit trail + feature importance)
-```
+    subgraph S3 ["3. Production & Guardrails"]
+        H["Transaction Input"]:::blueCard
+        I["FastAPI Backend"]:::backendCard
+        J{"Guardrails Engine\nSafety Rules Check"}:::redDiamond
+        K["Escalate to Human Review"]:::redCard
+        L["AI Decision Engine"]:::greenCard
+        
+        G --> I
+        H --> I
+        I --> J
+        J -- Violates Rule --> K
+        J -- Pass Rules --> L
+    end
 
----
+    subgraph S4 ["4. Human-in-the-Loop"]
+        M["Operator Dashboard"]:::backendCard
+        N{"Human Operator Review"}:::yellowCard
+        O["Execute Recovery Action"]:::greenCard
+        P["Action Cancelled"]:::redCard
+        
+        L --> M
+        K --> M
+        M --> N
+        N -- Approved --> O
+        N -- Rejected --> P
+    end
 
-## 🏗️ System Architecture
-
-![RecoverAI Architecture Diagram](./assets/recoverai_architecture_diagram.png)
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         RecoverAI Architecture                          │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   ┌──────────────┐     HTTP/REST      ┌──────────────────────────────┐  │
-│   │   Frontend   │ ◄────────────────► │     FastAPI Backend          │  │
-│   │  (HTML/CSS/  │                    │     (main.py | port 8000)    │  │
-│   │    JS UI)    │                    └──────────────┬───────────────┘  │
-│   └──────────────┘                                  │                  │
-│                                                     │                  │
-│                              ┌──────────────────────▼──────────────┐   │
-│                              │         Request Pipeline             │   │
-│                              │                                      │   │
-│                              │  PaymentEvent JSON                   │   │
-│                              │         │                            │   │
-│                              │         ▼                            │   │
-│                              │  ┌─────────────────┐                │   │
-│                              │  │  Guardrail Layer │ ◄── 5 Rules   │   │
-│                              │  │  (guardrails.py) │               │   │
-│                              │  └────────┬────────┘                │   │
-│                              │           │                          │   │
-│                              │    triggered?                        │   │
-│                              │    YES ──────► forced_action         │   │
-│                              │    NO         │                      │   │
-│                              │               ▼                      │   │
-│                              │  ┌────────────────────┐             │   │
-│                              │  │  CatBoost Policy   │             │   │
-│                              │  │  Engine (policy.py) │            │   │
-│                              │  │  *.cbm model file  │             │   │
-│                              │  └────────┬───────────┘             │   │
-│                              │           │                          │   │
-│                              │           ▼                          │   │
-│                              │  RecoveryDecision + probability      │   │
-│                              │           │                          │   │
-│                              │           ▼                          │   │
-│                              │  ┌──────────────────┐               │   │
-│                              │  │  SQLite Audit DB │               │   │
-│                              │  │  (database.py)   │               │   │
-│                              │  └──────────────────┘               │   │
-│                              └──────────────────────────────────────┘   │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 🔬 Advanced Pipeline Diagram
-
-```
-                    ╔════════════════════════════════════════╗
-                    ║         RECOVERAI FULL PIPELINE        ║
-                    ╚════════════════════════════════════════╝
-
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │  STAGE 1 — DATA COLLECTION & ENGINEERING                            │
-  │                                                                     │
-  │  [Kaggle Datasets]──►[download_datasets.py]──►[Raw CSVs]           │
-  │       • bank_transactions                                           │
-  │       • credit_card_fraud                                           │
-  │       • financial_transactions                                      │
-  │       • online_payments (PaySim)                                    │
-  │                    │                                                │
-  │                    ▼                                                │
-  │  [build_recoverai_dataset.py]                                       │
-  │       • Merge & clean 5 datasets                                    │
-  │       • Engineer 26 features                                        │
-  │       • Synthetic target: recovered_within_72h                      │
-  │       • 80/20 train-val split                                       │
-  │                    │                                                │
-  │          ┌─────────┴──────────┐                                    │
-  │          ▼                    ▼                                     │
-  │  [recoverai_training.csv]  [recoverai_validation.csv]              │
-  │     300,000 rows               60,000 rows                         │
-  └─────────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │  STAGE 2 — MODEL TRAINING (train_catboost.py)                      │
-  │                                                                     │
-  │  [Load Data] ──► [Feature Selection: 26 features]                  │
-  │                          │                                          │
-  │                          ▼                                          │
-  │  [CatBoost Pool] ──► [CatBoostClassifier]                          │
-  │       • iterations=500        • learning_rate=0.05                 │
-  │       • depth=7               • l2_leaf_reg=3                      │
-  │       • early_stop=50         • eval_metric=AUC                    │
-  │       • task_type=CPU         • thread_count=-1 (all cores)        │
-  │                          │                                          │
-  │                          ▼                                          │
-  │  [Best Iteration: 163] ──► [Evaluate on Val Set]                   │
-  │                          │                                          │
-  │              ┌───────────┼────────────┐                            │
-  │              ▼           ▼            ▼                            │
-  │  [recoverai_catboost.cbm] [metrics.json] [feature_importance.csv] │
-  └─────────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-  ┌─────────────────────────────────────────────────────────────────────┐
+    subgraph S5 ["5. Audit & Security"]
+        Q[("SQLite Audit Trail & Database")]:::goldCard
+        
+        O --> Q
+        P --> Q
+    end
+```�───────────────────────────────────────────┐
   │  STAGE 3 — INFERENCE PIPELINE (Runtime)                            │
   │                                                                     │
   │  Incoming Failed Transaction                                        │
