@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 900" width="100%" height="100%">
+
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff0055"/><stop offset="100%" stop-color="#ff0000"/></linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5500"/><stop offset="100%" stop-color="#ff3300"/></linearGradient>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffaa00"/><stop offset="100%" stop-color="#ff8800"/></linearGradient>
+    <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ddcc00"/><stop offset="100%" stop-color="#bbbb00"/></linearGradient>
+    <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#88dd00"/><stop offset="100%" stop-color="#55cc00"/></linearGradient>
+    <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00dd55"/><stop offset="100%" stop-color="#00aa33"/></linearGradient>
+    <linearGradient id="g7" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00ddaa"/><stop offset="100%" stop-color="#00aa88"/></linearGradient>
+    <linearGradient id="g8" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00aadd"/><stop offset="100%" stop-color="#0088cc"/></linearGradient>
+    <linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0055ff"/><stop offset="100%" stop-color="#0000ff"/></linearGradient>
+    <linearGradient id="g10" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5500ff"/><stop offset="100%" stop-color="#3300dd"/></linearGradient>
+    <linearGradient id="g11" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#aa00ff"/><stop offset="100%" stop-color="#8800dd"/></linearGradient>
+    <linearGradient id="g12" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff00ff"/><stop offset="100%" stop-color="#dd00dd"/></linearGradient>
+    <linearGradient id="g13" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff00aa"/><stop offset="100%" stop-color="#dd0088"/></linearGradient>
+    <linearGradient id="g14" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5588"/><stop offset="100%" stop-color="#ff3366"/></linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-intense" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00ffff" />
+    </marker>
+  </defs>
+
+<rect width="100%" height="100%" fill="#090a0f" rx="15" />
+<text x="500" y="50" font-family="Arial" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle" filter="url(#glow)">SYSTEM ARCHITECTURE</text>
+<g font-family="Arial" font-weight="bold" font-size="16" fill="#ffffff" text-anchor="middle">
+
+    <rect x="150" y="100" width="700" height="60" rx="10" fill="#ff0055" fill-opacity="0.2" stroke="#ff0055" stroke-width="3" filter="url(#glow)"/>
+    <text x="500" y="135">LAYER 1: USER / OPERATOR</text>
+    
+        <path d="M 500,160 L 500,195" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 450,195 L 450,160" stroke="#00ffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 550,160 L 550,195" stroke="#ff00ff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        
+    <rect x="150" y="195" width="700" height="60" rx="10" fill="#ff5500" fill-opacity="0.2" stroke="#ff5500" stroke-width="3" filter="url(#glow)"/>
+    <text x="500" y="230">LAYER 2: FRONTEND / OPERATOR DASHBOARD</text>
+    
+        <path d="M 500,255 L 500,290" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 450,290 L 450,255" stroke="#00ffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 550,255 L 550,290" stroke="#ff00ff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        
+    <rect x="150" y="290" width="700" height="60" rx="10" fill="#ffaa00" fill-opacity="0.2" stroke="#ffaa00" stroke-width="3" filter="url(#glow)"/>
+    <text x="500" y="325">LAYER 3: API GATEWAY / FASTAPI</text>
+    
+        <path d="M 500,350 L 500,385" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 450,385 L 450,350" stroke="#00ffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 550,350 L 550,385" stroke="#ff00ff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        
+    <rect x="150" y="385" width="700" height="60" rx="10" fill="#ddcc00" fill-opacity="0.2" stroke="#ddcc00" stroke-width="3" filter="url(#glow)"/>
+    <text x="500" y="420">LAYER 4: BUSINESS LOGIC</text>
+    
+        <path d="M 500,445 L 500,480" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 450,480 L 450,445" stroke="#00ffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 550,445 L 550,480" stroke="#ff00ff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        
+    <rect x="150" y="480" width="700" height="60" rx="10" fill="#00dd55" fill-opacity="0.2" stroke="#00dd55" stroke-width="3" filter="url(#glow)"/>
+    <text x="500" y="515">LAYER 5: GUARDRAILS ENGINE</text>
+    
+        <path d="M 500,540 L 500,575" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 450,575 L 450,540" stroke="#00ffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 550,540 L 550,575" stroke="#ff00ff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        
+    <rect x="150" y="575" width="700" height="60" rx="10" fill="#00aadd" fill-opacity="0.2" stroke="#00aadd" stroke-width="3" filter="url(#glow)"/>
+    <text x="500" y="610">LAYER 6: AI / ML INFERENCE ENGINE</text>
+    
+        <path d="M 500,635 L 500,670" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 450,670 L 450,635" stroke="#00ffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 550,635 L 550,670" stroke="#ff00ff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        
+    <rect x="150" y="670" width="700" height="60" rx="10" fill="#5500ff" fill-opacity="0.2" stroke="#5500ff" stroke-width="3" filter="url(#glow)"/>
+    <text x="500" y="705">LAYER 7: DATABASE / AUDIT TRAIL</text>
+    
+        <path d="M 500,730 L 500,765" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 450,765 L 450,730" stroke="#00ffff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 550,730 L 550,765" stroke="#ff00ff" stroke-width="4" stroke-dasharray="10,10" opacity="0.7">
+            <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        
+    <rect x="150" y="765" width="700" height="60" rx="10" fill="#ff00ff" fill-opacity="0.2" stroke="#ff00ff" stroke-width="3" filter="url(#glow)"/>
+    <text x="500" y="800">LAYER 8: MONITORING / LOGGING</text>
+    </g>
+</svg>
