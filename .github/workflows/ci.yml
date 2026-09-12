@@ -1,4 +1,4 @@
-name: CI — RecoverAI Hackathon
+name: CI — RecoverAI Production Pipeline
 
 on:
   push:
