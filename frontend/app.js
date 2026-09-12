@@ -6,7 +6,11 @@
 'use strict';
 
 /* ─── Config ─── */
-const API_BASE = 'http://localhost:8000/api';
+// Auto-detect: if running on Render/production, use same origin; else localhost
+const IS_PROD = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+const API_BASE = IS_PROD
+  ? `${window.location.origin}/api`
+  : 'http://localhost:8000/api';
 const STATS_REFRESH_MS  = 30_000;
 const EVENTS_REFRESH_MS = 10_000;
 
@@ -192,12 +196,90 @@ function showToast(message, type = 'info', duration = 4000) {
   }, duration);
 }
 
+/* ─── JWT Token Manager ─── */
+const TokenManager = {
+  _token: null,
+  _expiry: 0,
+
+  get() { return this._token; },
+
+  set(token) {
+    this._token = token;
+    // Decode exp from JWT payload (base64)
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      this._expiry = payload.exp ? payload.exp * 1000 : Date.now() + 30 * 60 * 1000;
+    } catch { this._expiry = Date.now() + 30 * 60 * 1000; }
+    localStorage.setItem('recoverai_token', token);
+  },
+
+  isValid() { return !!this._token && Date.now() < this._expiry; },
+
+  load() {
+    const stored = localStorage.getItem('recoverai_token');
+    if (stored) this.set(stored);
+  },
+
+  clear() {
+    this._token = null;
+    this._expiry = 0;
+    localStorage.removeItem('recoverai_token');
+  },
+
+  headers() {
+    return this.isValid() ? { 'Authorization': `Bearer ${this._token}` } : {};
+  }
+};
+
+/* ─── Auto-login with default credentials ─── */
+async function autoLogin() {
+  try {
+    const res = await fetch(`${API_BASE}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: 'admin', password: 'admin123' }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const token = data.access_token || data.token || data.jwt || data.data?.access_token;
+      if (token) {
+        TokenManager.set(token);
+        console.log('✅ Auto-login successful');
+        return true;
+      }
+    }
+  } catch(e) { console.warn('Auto-login skipped (no auth endpoint):', e.message); }
+  return false;
+}
+
 /* ─── API Fetch Wrapper ─── */
 async function apiFetch(path, options = {}) {
+  // Always attach JWT if we have one
+  const authHeaders = TokenManager.headers();
   const response = await fetch(`${API_BASE}${path}`, {
     ...options,
-    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeaders,
+      ...(options.headers || {}),
+    },
   });
+  // If 401, try to re-login once
+  if (response.status === 401) {
+    const loggedIn = await autoLogin();
+    if (loggedIn) {
+      const retry = await fetch(`${API_BASE}${path}`, {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          ...TokenManager.headers(),
+          ...(options.headers || {}),
+        },
+      });
+      if (!retry.ok) throw new Error(`HTTP ${retry.status}`);
+      return await retry.json();
+    }
+  }
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return await response.json();
 }
@@ -694,6 +776,12 @@ async function init() {
   startClock();
   regenerateTxnId();
   updateRiskBadge(document.getElementById('riskScore').value);
+
+  // Load stored token + auto-login on Render
+  TokenManager.load();
+  if (!TokenManager.isValid() && IS_PROD) {
+    await autoLogin();
+  }
 
   await Promise.all([
     loadStats(true),

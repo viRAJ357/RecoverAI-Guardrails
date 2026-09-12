@@ -1,4 +1,4 @@
-"""
+﻿"""
 RecoverAI - Pydantic Data Models
 Defines input/output schemas and audit records for the payment recovery system.
 """
@@ -85,7 +85,7 @@ class PaymentEvent(BaseModel):
     )
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "transaction_id": "TXN-DEMO-001",
                 "amount": 4999.0,
@@ -152,7 +152,7 @@ class RecoveryDecision(BaseModel):
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "transaction_id": "TXN-DEMO-001",
                 "recommended_action": "smart_retry",
@@ -225,3 +225,4 @@ class AuditRecord(BaseModel):
     operator_decision: Optional[str] = None   # 'approved' | 'rejected'
     operator_notes: Optional[str] = None
     reviewed_at: Optional[datetime] = None
+

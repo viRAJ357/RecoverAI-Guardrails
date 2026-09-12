@@ -1,16 +1,16 @@
-"""
+﻿"""
 RecoverAI - FastAPI Application Entry Point
 ============================================
 Exposes the REST API for the payment recovery intelligence system.
 
 Endpoints
 ---------
-POST /api/process-payment  — Core inference endpoint
-GET  /api/dashboard-stats  — Aggregate analytics for the dashboard
-GET  /api/recent-events    — Last 50 audit records
-GET  /api/health           — Health / readiness check
-POST /api/approve-action   — Operator approves or rejects a recommendation
-GET  /api/demo-event       — Returns a pre-filled sample PaymentEvent (for demos)
+POST /api/process-payment  â€” Core inference endpoint
+GET  /api/dashboard-stats  â€” Aggregate analytics for the dashboard
+GET  /api/recent-events    â€” Last 50 audit records
+GET  /api/health           â€” Health / readiness check
+POST /api/approve-action   â€” Operator approves or rejects a recommendation
+GET  /api/demo-event       â€” Returns a pre-filled sample PaymentEvent (for demos)
 
 Run with:
     uvicorn main:app --reload --host 0.0.0.0 --port 8000
@@ -24,10 +24,12 @@ from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 # ---------------------------------------------------------------------------
-# Path setup — allow imports from the backend/ directory itself
+# Path setup â€” allow imports from the backend/ directory itself
 # ---------------------------------------------------------------------------
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -68,7 +70,7 @@ app = FastAPI(
 )
 
 # ---------------------------------------------------------------------------
-# CORS — allow the React / Next.js frontend running on localhost during dev
+# CORS â€” allow the React / Next.js frontend running on localhost during dev
 # ---------------------------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
@@ -83,6 +85,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend")
+if os.path.exists(FRONTEND_DIR):
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+
+@app.get("/", include_in_schema=False)
+async def serve_dashboard():
+    index_path = os.path.join(FRONTEND_DIR, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"message": "RecoverAI API is running. Go to /docs for API documentation."}
+
 # ---------------------------------------------------------------------------
 # Startup / shutdown hooks
 # ---------------------------------------------------------------------------
@@ -90,9 +103,9 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup_event():
     """Initialise the database schema on startup."""
-    logger.info("RecoverAI API starting up …")
+    logger.info("RecoverAI API starting up â€¦")
     init_db()
-    model_status = "LOADED ✓" if is_model_loaded() else "NOT FOUND — using heuristic fallback"
+    model_status = "LOADED âœ“" if is_model_loaded() else "NOT FOUND â€” using heuristic fallback"
     logger.info("CatBoost model status: %s", model_status)
     logger.info("RecoverAI API ready.")
 
@@ -108,11 +121,11 @@ class ApproveActionRequest(BaseModel):
     notes: Optional[str] = None
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "transaction_id": "TXN-DEMO-001",
                 "decision": "approved",
-                "notes": "Manually verified — safe to retry.",
+                "notes": "Manually verified â€” safe to retry.",
             }
         }
 
@@ -159,7 +172,7 @@ async def process_payment(event: PaymentEvent) -> RecoveryDecision:
             }
             all_action_scores[recommended_action] = 1.0
             logger.info(
-                "Guardrail triggered for %s: %s → %s",
+                "Guardrail triggered for %s: %s â†’ %s",
                 event.transaction_id,
                 guardrail_reason,
                 recommended_action,
@@ -362,7 +375,7 @@ async def approve_action(request: ApproveActionRequest) -> Dict[str, Any]:
             )
 
         logger.info(
-            "Operator %s transaction %s — notes: %s",
+            "Operator %s transaction %s â€” notes: %s",
             request.decision,
             request.transaction_id,
             request.notes,
@@ -498,3 +511,4 @@ if __name__ == "__main__":
         reload=True,
         log_level="info",
     )
+
