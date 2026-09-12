@@ -1,87 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="100%" height="100%">
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" width="100%">
   <defs>
-    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff0055"/><stop offset="100%" stop-color="#ff0000"/></linearGradient>
-    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5500"/><stop offset="100%" stop-color="#ff3300"/></linearGradient>
-    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffaa00"/><stop offset="100%" stop-color="#ff8800"/></linearGradient>
-    <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ddcc00"/><stop offset="100%" stop-color="#bbbb00"/></linearGradient>
-    <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#88dd00"/><stop offset="100%" stop-color="#55cc00"/></linearGradient>
-    <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00dd55"/><stop offset="100%" stop-color="#00aa33"/></linearGradient>
-    <linearGradient id="g7" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00ddaa"/><stop offset="100%" stop-color="#00aa88"/></linearGradient>
-    <linearGradient id="g8" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00aadd"/><stop offset="100%" stop-color="#0088cc"/></linearGradient>
-    <linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0055ff"/><stop offset="100%" stop-color="#0000ff"/></linearGradient>
-    <linearGradient id="g10" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5500ff"/><stop offset="100%" stop-color="#3300dd"/></linearGradient>
-    <linearGradient id="g11" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#aa00ff"/><stop offset="100%" stop-color="#8800dd"/></linearGradient>
-    <linearGradient id="g12" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff00ff"/><stop offset="100%" stop-color="#dd00dd"/></linearGradient>
-    <linearGradient id="g13" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff00aa"/><stop offset="100%" stop-color="#dd0088"/></linearGradient>
-    <linearGradient id="g14" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5588"/><stop offset="100%" stop-color="#ff3366"/></linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="6" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="glow-intense" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="10" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+    <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#00ffff" />
-    </marker>
-  </defs>
-<rect width="100%" height="100%" fill="#090a0f" rx="15" />
-<text x="500.0" y="50" font-family="Arial" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle" filter="url(#glow)">SECURITY ARCHITECTURE</text>
-<g font-family="Arial, sans-serif" font-weight="bold" font-size="12" fill="#ffffff" text-anchor="middle">
-<path d="M 250.0,120 L 500.0,120 L 750.0,120 Q 750.0,280 750.0,280 L 500.0,280 L 250.0,280 " fill="none" stroke="#222730" stroke-width="8" />
-<path d="M 250.0,120 L 500.0,120 L 750.0,120 Q 750.0,280 750.0,280 L 500.0,280 L 250.0,280 " fill="none" stroke="#00ffff" stroke-width="4" stroke-dasharray="20, 20" filter="url(#glow)">
-  <animate attributeName="stroke-dashoffset" from="40" to="0" dur="1s" repeatCount="indefinite" />
-</path>
-<path id="animPath_9_security_arch" d="M 250.0,120 L 500.0,120 L 750.0,120 Q 750.0,280 750.0,280 L 500.0,280 L 250.0,280 " fill="none" stroke="none" />
-
-    <circle r="6" fill="#ffffff" filter="url(#glow-intense)">
-      <animateMotion dur="6s" repeatCount="indefinite">
-        <mpath href="#animPath_9_security_arch" />
-      </animateMotion>
-    </circle>
-    
-        <g transform="translate(250.0,120)">
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="url(#g1)" filter="url(#glow)"/>
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.5"/>
-          <text y="5">USER</text>
-        </g>
-        
-        <g transform="translate(500.0,120)">
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="url(#g2)" filter="url(#glow)"/>
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.5"/>
-          <text y="5">AUTHENTICATION</text>
-        </g>
-        
-        <g transform="translate(750.0,120)">
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="url(#g3)" filter="url(#glow)"/>
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.5"/>
-          <text y="5">AUTHORIZATION</text>
-        </g>
-        
-        <g transform="translate(750.0,280)">
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="url(#g4)" filter="url(#glow)"/>
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.5"/>
-          <text y="5">API</text>
-        </g>
-        
-        <g transform="translate(500.0,280)">
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="url(#g5)" filter="url(#glow)"/>
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.5"/>
-          <text y="5">BUSINESS LOGIC</text>
-        </g>
-        
-        <g transform="translate(250.0,280)">
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="url(#g6)" filter="url(#glow)"/>
-          <rect x="-80" y="-35" width="160" height="70" rx="12" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.5"/>
-          <text y="5">DATABASE</text>
-        </g>
-        </g>
-</svg>
+  </defs><rect width="900" height="580" fill="#090a0f" rx="16"/>
+<text x="450" y="45" font-family="Consolas,monospace" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle" filter="url(#glow2)">🔐  SECURITY ARCHITECTURE</text>
+<rect x="40" y="70" width="820" height="460" rx="16" fill="none" stroke="#00ffcc" stroke-width="3" stroke-dasharray="18,10" filter="url(#glow)"><animate attributeName="stroke-dashoffset" from="28" to="0" dur="1s" repeatCount="indefinite"/></rect><text x="450" y="100" font-family="Consolas,monospace" font-size="16" font-weight="bold" fill="#00ffcc" text-anchor="middle" filter="url(#glow)">🔒  SECURITY BOUNDARY</text><rect x="70" y="130" width="760" height="118" rx="10" fill="#00ccff" fill-opacity="0.08" stroke="#00ccff" stroke-width="2" filter="url(#glow)"/><text x="450" y="152" font-family="Consolas,monospace" font-size="15" font-weight="bold" fill="#00ccff" text-anchor="middle" filter="url(#glow)">INPUT VALIDATION (Pydantic)</text><text x="110" y="176" font-family="Consolas,monospace" font-size="13" fill="#00ccff" filter="url(#glow)">• Type checking on all 26 fields</text><text x="110" y="202" font-family="Consolas,monospace" font-size="13" fill="#00ccff" filter="url(#glow)">• Range validation (risk_score 0-100)</text><text x="110" y="228" font-family="Consolas,monospace" font-size="13" fill="#00ccff" filter="url(#glow)">• Required field enforcement</text><rect x="70" y="276" width="760" height="118" rx="10" fill="#ff8800" fill-opacity="0.08" stroke="#ff8800" stroke-width="2" filter="url(#glow)"/><text x="450" y="298" font-family="Consolas,monospace" font-size="15" font-weight="bold" fill="#ff8800" text-anchor="middle" filter="url(#glow)">GUARDRAILS LAYER</text><text x="110" y="322" font-family="Consolas,monospace" font-size="13" fill="#ff8800" filter="url(#glow)">• Hard-coded financial rules — 5 rules</text><text x="110" y="348" font-family="Consolas,monospace" font-size="13" fill="#ff8800" filter="url(#glow)">• Cannot be overridden by ML model</text><text x="110" y="374" font-family="Consolas,monospace" font-size="13" fill="#ff8800" filter="url(#glow)">• Prevents model hallucination</text><rect x="70" y="422" width="760" height="92" rx="10" fill="#aaff00" fill-opacity="0.08" stroke="#aaff00" stroke-width="2" filter="url(#glow)"/><text x="450" y="444" font-family="Consolas,monospace" font-size="15" font-weight="bold" fill="#aaff00" text-anchor="middle" filter="url(#glow)">CORS MIDDLEWARE</text><text x="110" y="468" font-family="Consolas,monospace" font-size="13" fill="#aaff00" filter="url(#glow)">• Configurable origin control</text><text x="110" y="494" font-family="Consolas,monospace" font-size="13" fill="#aaff00" filter="url(#glow)">• FastAPI built-in CORS handler</text></svg>
