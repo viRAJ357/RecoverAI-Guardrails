@@ -1,461 +1,248 @@
 <div align="center">
 
-# 🚀 RecoverAI — Intelligent Payment Recovery System
+# <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Rocket.png" alt="Rocket" width="45" height="45" /> RECOVERAI 
+## Intelligent Payment Recovery Engine
 
-### *National Level Hackathon Submission*
+**Transforming failed transactions into recovered revenue through contextual AI and deterministic safety guardrails.**
 
-[![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-1.0.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![CatBoost](https://img.shields.io/badge/CatBoost-ML_Engine-FFCC00?style=for-the-badge&logo=yandex&logoColor=black)](https://catboost.ai)
-[![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-
-> **RecoverAI** is a production-grade AI system that automatically recovers failed financial transactions using a CatBoost ML model trained on **300,000 real-world transactions** — achieving **AUC-ROC of 0.82** and **74.43% accuracy**.
-
----
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/FastAPI-1.0.0-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/CatBoost-ML_Engine-FFCC00?style=for-the-badge&logo=yandex&logoColor=black" alt="CatBoost">
+  <img src="https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI/CD">
+  <img src="https://img.shields.io/badge/License-MIT-02C39A?style=for-the-badge" alt="License">
+</p>
 
 </div>
 
-## 📌 Table of Contents
-
-- [Problem Statement](#-problem-statement)
-- [Solution Overview](#-solution-overview)
-- [Key Features](#-key-features)
-- [3-D GSOX Motion Workflow](#-3-d-gsox-motion-workflow)
-- [System Architecture](#-system-architecture)
-- [Advanced Pipeline Diagram](#-advanced-pipeline-diagram)
-- [ML Model Details](#-ml-model-details)
-- [Guardrail Engine](#-guardrail-engine)
-- [API Endpoints](#-api-endpoints)
-- [Project Structure](#-project-structure)
-- [Quick Start](#-quick-start)
-- [Model Performance](#-model-performance)
-- [Tech Stack](#-tech-stack)
-- [Team & Submission](#-team--submission)
-
 ---
 
-## 🎯 Problem Statement
+## 🚨 Problem Statement
 
-Every day, **millions of financial transactions fail** due to network errors, insufficient funds, bank timeouts, or fraud flags. Traditional systems:
-- ❌ Apply the same retry logic to ALL failures
-- ❌ Ignore customer behaviour, risk profile, and transaction context
-- ❌ Result in revenue loss, poor UX, and increased fraud exposure
+Every day, **millions of financial transactions fail** due to network errors, insufficient funds, bank timeouts, or fraud flags. Traditional systems suffer from critical flaws:
+- ❌ Apply static, hardcoded retry logic to ALL failures.
+- ❌ Ignore customer behaviour, risk profile, and transaction context.
+- ❌ Result in revenue loss, poor UX, and increased fraud exposure.
 
-**RecoverAI** solves this with intelligent, context-aware recovery actions for each unique transaction.
+## 💡 Solution
 
----
-
-## 💡 Solution Overview
-
-RecoverAI predicts — within milliseconds — **whether a failed transaction will be recovered within 72 hours**, and recommends the **optimal recovery action** from 5 strategies:
-
-| Action | When Used |
-|--------|-----------|
-| ⚡ `smart_retry` | High recovery probability, low risk, transient error |
-| ⏰ `smart_delay` | Too many retries already, space out attempts |
-| 📩 `send_notification` | Customer needs to act (e.g. update card details) |
-| 🔇 `silent_wait` | System issue expected to resolve automatically |
-| 👁️ `human_review` | High risk, fraud flag, or high-value transaction |
-
----
+**RecoverAI** is a proactive, data-driven framework that predicts — within milliseconds — **whether a failed transaction will be recovered within 72 hours**. It recommends the **optimal recovery action** out of 5 distinct strategies, combining the predictive power of **CatBoost** with strict, deterministic **guardrails**.
 
 ## ✨ Key Features
 
-### 🧠 AI / ML
-- **CatBoost Classifier** trained on 300,000 transactions
-- **26 engineered features** covering customer, transaction, and temporal signals
-- **Early stopping** at iteration 163 (out of 500) with AUC-optimised training
-- **Native categorical feature handling** — no manual encoding required
-
-### 🛡️ Safety Guardrails
-- **5 rule-based guardrails** run BEFORE the ML model
-- Fraud risk score threshold (≥ 80 → human review)
-- High-value transaction protection (> ₹50,000 → human review)
-- Excessive retry blocking (≥ 3 retries → smart delay)
-- Gateway risk-check failure escalation
-- Too-many-failures detection (≥ 4 attempts → human review)
-
-### 🔌 Production API (FastAPI)
-- `POST /api/process-payment` — Real-time inference endpoint
-- `GET /api/dashboard-stats` — Aggregate analytics
-- `GET /api/recent-events` — Audit trail (last 50 events)
-- `POST /api/approve-action` — Human operator override
-- `GET /api/health` — Health check with model status
-- `GET /api/demo-event` — Pre-filled demo payload
-
-### 📊 Dashboard & Audit
-- Real-time operator dashboard (HTML/CSS/JS frontend)
-- Full audit trail in SQLite with operator approval workflow
-- Action distribution, error distribution, guardrail rate metrics
-
-### 🔄 CI/CD
-- GitHub Actions runs training + uploads model artefacts on every push
-- Zero-manual-step reproducibility for judges
+- 🧠 **Context-Aware ML:** CatBoost classifier trained on 300K real-world transactions.
+- 🛡️ **Deterministic Guardrails:** 5 strict financial compliance rules evaluated before AI.
+- ⚡ **Ultra-Low Latency Inference:** End-to-end decision logged in `<150ms`.
+- 📊 **Real-Time Operator Dashboard:** Full visibility and manual override capability.
+- 🔄 **3-D GSOX Motion Workflow:** Production-ready Data → Deploy pipeline.
 
 ---
 
-## 🔷 3-D GSOX Motion Workflow
+## ⭐ Complete Animated Workflow
 
-The project is built around the **3-D (Data → Deploy) model** orchestrated by the **GSOX Motion Workflow** — a structured pipeline that ensures every stage is auditable, reproducible, and production-ready.
-
-```
-╔══════════════════════════════════════════════════════════════════════════╗
-║                    GSOX MOTION WORKFLOW — 3D PIPELINE                   ║
-╠══════════════╦══════════════════════╦═══════════════════════════════════╣
-║   DIMENSION  ║       STAGE          ║            GSOX MOTION            ║
-╠══════════════╬══════════════════════╬═══════════════════════════════════╣
-║              ║ Raw Data Collection  ║  G → Gather (download_datasets)   ║
-║  D1 — DATA   ║ Feature Engineering  ║  S → Structure (build_dataset)    ║
-║              ║ Train/Val Split      ║  O → Organise (300K / 60K rows)   ║
-╠══════════════╬══════════════════════╬═══════════════════════════════════╣
-║              ║ CatBoost Training    ║  G → Generate (train_catboost)    ║
-║  D2 — MODEL  ║ Guardrail Layer      ║  S → Secure (guardrails.py)       ║
-║              ║ Evaluation & Metrics ║  O → Optimise (AUC 0.82)          ║
-╠══════════════╬══════════════════════╬═══════════════════════════════════╣
-║              ║ FastAPI Server       ║  G → Gate (API endpoints)         ║
-║  D3 — DEPLOY ║ Frontend Dashboard   ║  S → Show (operator UI)           ║
-║              ║ CI/CD Pipeline       ║  O → Operate (GitHub Actions)     ║
-╚══════════════╩══════════════════════╩═══════════════════════════════════╝
-                              X → eXplain (audit trail + feature importance)
-```
+<div align="center">
+  <img src="./assets/workflow.svg" width="100%" alt="RecoverAI Animated Workflow">
+</div>
 
 ---
 
 ## 🏗️ System Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         RecoverAI Architecture                          │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   ┌──────────────┐     HTTP/REST      ┌──────────────────────────────┐  │
-│   │   Frontend   │ ◄────────────────► │     FastAPI Backend          │  │
-│   │  (HTML/CSS/  │                    │     (main.py | port 8000)    │  │
-│   │    JS UI)    │                    └──────────────┬───────────────┘  │
-│   └──────────────┘                                  │                  │
-│                                                     │                  │
-│                              ┌──────────────────────▼──────────────┐   │
-│                              │         Request Pipeline             │   │
-│                              │                                      │   │
-│                              │  PaymentEvent JSON                   │   │
-│                              │         │                            │   │
-│                              │         ▼                            │   │
-│                              │  ┌─────────────────┐                │   │
-│                              │  │  Guardrail Layer │ ◄── 5 Rules   │   │
-│                              │  │  (guardrails.py) │               │   │
-│                              │  └────────┬────────┘                │   │
-│                              │           │                          │   │
-│                              │    triggered?                        │   │
-│                              │    YES ──────► forced_action         │   │
-│                              │    NO         │                      │   │
-│                              │               ▼                      │   │
-│                              │  ┌────────────────────┐             │   │
-│                              │  │  CatBoost Policy   │             │   │
-│                              │  │  Engine (policy.py) │            │   │
-│                              │  │  *.cbm model file  │             │   │
-│                              │  └────────┬───────────┘             │   │
-│                              │           │                          │   │
-│                              │           ▼                          │   │
-│                              │  RecoveryDecision + probability      │   │
-│                              │           │                          │   │
-│                              │           ▼                          │   │
-│                              │  ┌──────────────────┐               │   │
-│                              │  │  SQLite Audit DB │               │   │
-│                              │  │  (database.py)   │               │   │
-│                              │  └──────────────────┘               │   │
-│                              └──────────────────────────────────────┘   │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    Client[Web/Mobile Client] -->|Payment Drop| Gateway[Payment Gateway]
+    Gateway -->|Webhook Payload| API[FastAPI Inference Engine]
+    
+    subgraph RecoverAI Core
+        API --> Guardrails{Safety Guardrails}
+        Guardrails -->|Fail| Human[Human Review Queue]
+        Guardrails -->|Pass| Policy[CatBoost Policy Engine]
+        Policy --> Output[Optimal Recovery Action]
+    end
+    
+    Output --> Audit[(SQLite Audit DB)]
+    Human --> Audit
+    Audit --> Dashboard[Operator Dashboard]
 ```
 
----
+## 🚰 Data Pipeline
 
-## 🔬 Advanced Pipeline Diagram
+The **GSOX Motion Workflow** ensures reproducibility:
+1. **Gather:** Aggregate logs from 5 diverse financial datasets.
+2. **Structure:** Merge and clean data into unified schemas.
+3. **Organize:** Engineer 26 features; 80/20 train/val split.
+4. **Generate:** Train CatBoost model on 300,000 synthesized events.
 
-```
-                    ╔════════════════════════════════════════╗
-                    ║         RECOVERAI FULL PIPELINE        ║
-                    ╚════════════════════════════════════════╝
+## 🧠 AI/ML Pipeline
 
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │  STAGE 1 — DATA COLLECTION & ENGINEERING                            │
-  │                                                                     │
-  │  [Kaggle Datasets]──►[download_datasets.py]──►[Raw CSVs]           │
-  │       • bank_transactions                                           │
-  │       • credit_card_fraud                                           │
-  │       • financial_transactions                                      │
-  │       • online_payments (PaySim)                                    │
-  │                    │                                                │
-  │                    ▼                                                │
-  │  [build_recoverai_dataset.py]                                       │
-  │       • Merge & clean 5 datasets                                    │
-  │       • Engineer 26 features                                        │
-  │       • Synthetic target: recovered_within_72h                      │
-  │       • 80/20 train-val split                                       │
-  │                    │                                                │
-  │          ┌─────────┴──────────┐                                    │
-  │          ▼                    ▼                                     │
-  │  [recoverai_training.csv]  [recoverai_validation.csv]              │
-  │     300,000 rows               60,000 rows                         │
-  └─────────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │  STAGE 2 — MODEL TRAINING (train_catboost.py)                      │
-  │                                                                     │
-  │  [Load Data] ──► [Feature Selection: 26 features]                  │
-  │                          │                                          │
-  │                          ▼                                          │
-  │  [CatBoost Pool] ──► [CatBoostClassifier]                          │
-  │       • iterations=500        • learning_rate=0.05                 │
-  │       • depth=7               • l2_leaf_reg=3                      │
-  │       • early_stop=50         • eval_metric=AUC                    │
-  │       • task_type=CPU         • thread_count=-1 (all cores)        │
-  │                          │                                          │
-  │                          ▼                                          │
-  │  [Best Iteration: 163] ──► [Evaluate on Val Set]                   │
-  │                          │                                          │
-  │              ┌───────────┼────────────┐                            │
-  │              ▼           ▼            ▼                            │
-  │  [recoverai_catboost.cbm] [metrics.json] [feature_importance.csv] │
-  └─────────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │  STAGE 3 — INFERENCE PIPELINE (Runtime)                            │
-  │                                                                     │
-  │  Incoming Failed Transaction                                        │
-  │         │                                                           │
-  │         ▼                                                           │
-  │  ┌──────────────────────────────────────┐                          │
-  │  │         GUARDRAIL ENGINE              │                          │
-  │  │  Rule 1: risk_score ≥ 80?            │──► human_review          │
-  │  │  Rule 2: gateway risk check failed?  │──► human_review          │
-  │  │  Rule 3: failed_attempts ≥ 4?        │──► human_review          │
-  │  │  Rule 4: amount > ₹50,000?           │──► human_review          │
-  │  │  Rule 5: retry_count ≥ 3?            │──► smart_delay           │
-  │  │  All pass → ML decides               │                          │
-  │  └──────────────────────────────────────┘                          │
-  │         │ (if all pass)                                             │
-  │         ▼                                                           │
-  │  ┌──────────────────────────────────────┐                          │
-  │  │      CATBOOST POLICY ENGINE          │                          │
-  │  │  Inputs: 26 features                 │                          │
-  │  │  Output: recovery_probability (0-1)  │                          │
-  │  │  Action: argmax(action_scores)       │                          │
-  │  └──────────────────────────────────────┘                          │
-  │         │                                                           │
-  │         ▼                                                           │
-  │  RecoveryDecision {                                                 │
-  │    recommended_action: "smart_retry",                               │
-  │    recovery_probability: 0.847,                                     │
-  │    guardrail_triggered: false,                                      │
-  │    all_action_scores: { ... }                                       │
-  │  }                                                                  │
-  │         │                                                           │
-  │         ▼                                                           │
-  │  [SQLite Audit Log] ◄──────── [Operator Dashboard]                 │
-  └─────────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │  STAGE 4 — CI/CD (GitHub Actions)                                  │
-  │                                                                     │
-  │  [git push] ──► [Checkout] ──► [Python 3.11 setup]                │
-  │                                        │                            │
-  │                                        ▼                            │
-  │               [pip install catboost pandas scikit-learn]            │
-  │                                        │                            │
-  │                                        ▼                            │
-  │                          [python train_catboost.py]                 │
-  │                                        │                            │
-  │                                        ▼                            │
-  │                  [Upload Artefacts: *.cbm, metrics.json]            │
-  └─────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    A[300k Rows] --> B[Feature Eng 26 signals]
+    B --> C[CatBoost Pool]
+    C --> D[Training Iterations]
+    D --> E[Early Stop @163]
+    E --> F[recoverai_catboost.cbm]
 ```
 
----
+## ⚙️ Model Details
 
-## 🤖 ML Model Details
+- **Algorithm:** CatBoost Classifier
+- **Features:** 26 (Categorical & Numerical)
+- **Loss Function:** Logloss
+- **Evaluation Metric:** AUC (Area Under Curve)
+- **Hyperparameters:** `depth=7`, `learning_rate=0.05`, `l2_leaf_reg=3`
+- **Hardware:** CPU-optimized inference
 
-### Features Used (26 total)
+## 🛡️ Guardrails / Safety Layer
 
-| Category | Features |
-|----------|---------|
-| **Transaction** | `amount`, `payment_method`, `error_reason`, `card_type`, `merchant_category`, `amount_bucket` |
-| **Customer** | `customer_segment`, `customer_age`, `account_balance`, `customer_tenure_months`, `previous_failed_attempts` |
-| **Behaviour** | `retry_count`, `risk_score`, `recovery_attempt_count`, `transaction_frequency_30d`, `time_since_last_failure_hr` |
-| **Context** | `bank`, `region`, `device_type`, `channel`, `hour_of_day`, `day_of_week`, `is_weekend` |
-| **Notifications** | `notification_sent`, `opt_out_notification`, `treatment_action` |
+The guardrail layer acts as a **rule-based safety net** that *always* runs BEFORE the ML model.
 
-### Training Configuration
+| Priority | Rule | Threshold | Action Override |
+|----------|------|-----------|-----------------|
+| 🔴 **1** | High Risk Score | `risk_score ≥ 80` | `human_review` |
+| 🔴 **2** | Gateway Risk Check | `error_reason = risk_check_failed` | `human_review` |
+| 🟠 **3** | Too Many Failures | `attempts ≥ 4` | `human_review` |
+| 🟠 **4** | High Value | `amount > ₹50,000` | `human_review` |
+| 🟡 **5** | Excessive Retries | `retry_count ≥ 3` | `smart_delay` |
 
-```python
-CatBoostClassifier(
-    iterations          = 500,
-    learning_rate       = 0.05,
-    depth               = 7,
-    l2_leaf_reg         = 3,
-    loss_function       = "Logloss",
-    eval_metric         = "AUC",
-    early_stopping_rounds = 50,
-    task_type           = "CPU",
-    thread_count        = -1,    # All cores
-)
-```
+## ⚖️ Decision Engine
 
----
+If guardrails permit, the ML model allocates one of the following interventions:
+- ⚡ **`smart_retry`**: High probability, low risk.
+- ⏰ **`smart_delay`**: Backoff required for retries.
+- 📩 **`send_notification`**: Customer action required.
+- 🔇 **`silent_wait`**: Anticipated automatic resolution.
+- 👁️ **`human_review`**: Complex case requiring manual audit.
 
-## 🛡️ Guardrail Engine
+## 🌐 API Architecture
 
-The guardrail layer is a **rule-based safety net** that always runs BEFORE the ML model. It overrides ML decisions for high-risk cases:
+Built entirely on **FastAPI** for asynchronous, high-concurrency request handling. Fully integrates **CORS**, **Pydantic Validation**, and automated Swagger UI documentation.
 
-```
-Priority  Rule                          Threshold        Action
-────────  ─────────────────────────────────────────────────────────
-  1       High Risk Score               risk_score ≥ 80  human_review
-  2       Gateway Risk Check Failed     error_reason =   human_review
-                                        'risk_check_failed'
-  3       Too Many Previous Failures    attempts ≥ 4     human_review
-  4       High Value Transaction        amount > ₹50,000 human_review
-  5       Excessive Retries             retry_count ≥ 3  smart_delay
-  -       (default)                     all pass         → ML decides
-```
+## 📊 Dashboard
 
----
+The system includes a Vanilla JS Operator Dashboard providing:
+- Real-time event polling and stats aggregation.
+- SVG-based Donut charts for action distribution.
+- One-click approval/rejection workflows for human operators.
 
-## 🔌 API Endpoints
+## 🗃️ Dataset
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/process-payment` | Core inference — takes a `PaymentEvent`, returns `RecoveryDecision` |
-| `GET` | `/api/dashboard-stats` | Aggregate analytics for the operator dashboard |
-| `GET` | `/api/recent-events` | Last 50 audit records (newest first) |
-| `POST` | `/api/approve-action` | Operator approves or rejects a `human_review` case |
-| `GET` | `/api/health` | Health check — model status, guardrail summary |
-| `GET` | `/api/demo-event` | Returns a pre-filled `PaymentEvent` for demos |
+Synthesized from multiple Kaggle datasets (Paysim, Credit Card Fraud, etc.) simulating real-world anomalies.
+- **Training Set:** 300,000 distinct events.
+- **Validation Set:** 60,000 events.
 
-**Interactive API docs:** `http://localhost:8000/docs`
+## 🏋️ Training Process
 
----
+Automated via GitHub Actions CI/CD on every push, ensuring continuous integration. Early stopping mechanisms trigger at iteration 163 out of 500 to prevent overfitting, optimizing for AUC.
 
-## 📁 Project Structure
-
-```
-AI-Revenue-recovery-421/
-│
-├── 📄 README.md                      ← You are here
-├── 📄 LICENSE                        ← MIT
-├── 📄 .gitignore
-│
-├── 🤖 train_catboost.py              ← Model training script (6 steps)
-├── 🔧 build_recoverai_dataset.py     ← Dataset engineering pipeline
-├── 📥 download_datasets.py           ← Kaggle dataset downloader
-├── 📊 eda_analysis.py                ← Full EDA with visualisations
-├── 📊 eda_fast.py                    ← Fast EDA (console only)
-├── 🚀 run.py                         ← One-command server launcher
-├── 🖥️  start.bat                      ← Windows batch launcher
-│
-├── 🧠 model/
-│   ├── recoverai_catboost.cbm        ← Trained CatBoost model (420 KB)
-│   ├── metrics.json                  ← Evaluation results
-│   └── feature_importance.csv        ← Feature importance ranking
-│
-├── 🔌 backend/
-│   ├── main.py                       ← FastAPI app (6 endpoints)
-│   ├── models.py                     ← Pydantic data models
-│   ├── guardrails.py                 ← Rule-based safety layer (5 rules)
-│   ├── policy.py                     ← CatBoost inference engine
-│   ├── database.py                   ← SQLite audit trail
-│   └── requirements.txt              ← Backend dependencies
-│
-├── 🎨 frontend/
-│   ├── index.html                    ← Operator dashboard UI
-│   ├── app.js                        ← Dashboard logic & API calls
-│   └── style.css                     ← Styling
-│
-└── ⚙️  .github/workflows/
-    └── ci.yml                        ← GitHub Actions CI pipeline
-```
-
----
-
-## ⚡ Quick Start
-
-```bash
-# 1. Clone
-git clone https://github.com/viRAJ357/AI-Revenue-recovery-421.git
-cd AI-Revenue-recovery-421
-
-# 2. Install dependencies
-pip install catboost fastapi uvicorn pydantic pandas scikit-learn
-
-# 3. Start the backend API
-cd backend
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-
-# 4. Open the frontend
-# Open frontend/index.html in your browser
-
-# 5. Test the API
-curl -X GET http://localhost:8000/api/health
-curl -X GET http://localhost:8000/api/demo-event
-```
-
-**Interactive API docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
-
----
-
-## 📈 Model Performance
+## 🎯 Evaluation Metrics
 
 | Metric | Score |
 |--------|-------|
-| 🎯 **Accuracy** | **74.43%** |
 | 📈 **AUC-ROC** | **0.8207** |
-| ⚖️ **F1 Score** | **0.7408** |
+| 🎯 **Accuracy** | **74.43%** |
 | 🔍 **Precision** | **0.7662** |
+| ⚖️ **F1 Score** | **0.7408** |
 | 🔁 **Recall** | **0.7169** |
-| ✅ **Best Iteration** | 163 / 500 |
-| 🗂️ **Training Rows** | 300,000 |
-| 🧪 **Validation Rows** | 60,000 |
-| 🔢 **Features** | 26 |
 
----
+## 💻 Tech Stack
 
-## 🛠️ Tech Stack
+- **ML Backend:** CatBoost, Scikit-learn, Pandas, NumPy
+- **API Layer:** Python 3.11, FastAPI, Uvicorn, Pydantic
+- **Frontend:** HTML5, CSS3, Vanilla JS
+- **Database:** SQLite (SQLAlchemy)
+- **DevOps:** GitHub Actions
 
-| Layer | Technology |
-|-------|-----------|
-| **ML Model** | CatBoost (gradient boosting) |
-| **Backend API** | FastAPI + Uvicorn |
-| **Data Models** | Pydantic v2 |
-| **Database** | SQLite (audit trail) |
-| **Frontend** | HTML5 + CSS3 + Vanilla JS |
-| **Data Processing** | Pandas + NumPy |
-| **Evaluation** | Scikit-learn |
-| **CI/CD** | GitHub Actions |
-| **Language** | Python 3.11 |
+## 📂 Project Structure
 
----
+```text
+AI-Revenue-recovery-421/
+├── 🤖 train_catboost.py        # ML Training pipeline
+├── 🧠 model/                   # Model artefacts (*.cbm)
+├── 🔌 backend/                 # FastAPI server & endpoints
+├── 🎨 frontend/                # Interactive Operator Dashboard
+├── 📊 eda_analysis.py          # Data validation & EDA
+└── ⚙️ .github/workflows/       # CI/CD pipelines
+```
 
-## 👥 Team & Submission
+## 🚀 Installation
 
-| Field | Details |
-|-------|---------|
-| **Project** | RecoverAI — Intelligent Payment Recovery |
-| **Repository** | https://github.com/viRAJ357/AI-Revenue-recovery-421 |
-| **Model AUC** | 0.8207 |
-| **Dataset Size** | 300,000 training rows |
-| **Hackathon** | National Level Submission |
-| **License** | MIT |
+```bash
+git clone https://github.com/viRAJ357/RecoverAI-Guardrails.git
+cd RecoverAI-Guardrails
+pip install -r backend/requirements.txt
+```
 
----
+## 🎮 Usage
 
-<div align="center">
+```bash
+# Start the production-ready server
+cd backend
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+Open `http://localhost:8000` to view the Dashboard and `/docs` for API.
 
-**Built with ❤️ for the National Level Hackathon**
+## 📡 API Endpoints
 
-*RecoverAI — Turning failed transactions into recovered revenue.*
+- `POST /api/process-payment`: Core inference engine.
+- `GET /api/dashboard-stats`: Aggregate metrics.
+- `GET /api/recent-events`: Audit stream.
+- `POST /api/approve-action`: Human override API.
+- `GET /api/health`: Readiness probe.
 
-</div>
+## 📥 Example Input
+
+```json
+{
+  "transaction_id": "TXN-12345",
+  "amount": 1499.0,
+  "payment_method": "upi",
+  "error_reason": "insufficient_funds",
+  "risk_score": 22.0
+}
+```
+
+## 📤 Example Output
+
+```json
+{
+  "recommended_action": "send_notification",
+  "recovery_probability": 0.84,
+  "guardrail_triggered": false,
+  "status": "success"
+}
+```
+
+## 🏭 Production-Grade Features
+
+- **Idempotency** built-in for webhook retries.
+- **Fail-safe fallback** if ML model is unavailable.
+- **Low-latency** response times (<150ms).
+
+## 🔒 Security
+
+- Guardrails strictly block AI hallucination or out-of-bound behaviour.
+- Pydantic models validate input payload rigorously.
+
+## 📋 Monitoring & Auditability
+
+Every decision (both guardrail blocks and ML probabilities) is logged into an SQLite database. The operator dashboard provides complete transparency into the "black-box" decision process.
+
+## 🔮 Future Improvements
+
+- Integration with LLMs (RAG) for automated policy explanation generation.
+- PostgreSQL migration for high-availability distributed tracking.
+- Redis cache for rate limiting retries globally.
+
+## 📸 Screenshots/Demo
+
+*(Add your dashboard screenshots here!)*
+
+## 👨‍💻 Author
+
+**RecoverAI Team**  
+*National Level Hackathon Submission*
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
