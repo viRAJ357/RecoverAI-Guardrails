@@ -1,0 +1,16 @@
+{
+  "validation_completed": true,
+  "training_rows": 300000,
+  "validation_rows": 60000,
+  "column_count": 31,
+  "training_recovery_rate": 0.3632,
+  "duplicate_training_transaction_ids": 0,
+  "invalid_opt_out_notification_assignments": 0,
+  "training_action_counts": {
+    "silent_wait": 53038,
+    "smart_delay": 73762,
+    "payment_link": 107069,
+    "notify_payment_link": 51103,
+    "human_review": 15028
+  }
+}

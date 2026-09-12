@@ -1,0 +1,24 @@
+{
+  "dataset_name": "RecoverAI PaySim Mapped Payment Recovery Benchmark",
+  "source": "Kaggle PaySim Mobile Money Transactions (PS_20174392719_1491204439457_log.csv)",
+  "total_records": 360000,
+  "training_records": 300000,
+  "validation_records": 60000,
+  "num_columns": 31,
+  "target_variable": "recovered_within_72h",
+  "domain": "Fintech / Digital Payment Recovery",
+  "paper_reproducibility": {
+    "recommended_citation": "PaySim: A financial mobile money simulator for fraud detection and payment recovery evaluation",
+    "primary_metrics": [
+      "AUC-ROC",
+      "Accuracy",
+      "Precision",
+      "Recall",
+      "F1-Score"
+    ],
+    "benchmark_splits": {
+      "training_file": "data/recovery_train.csv",
+      "validation_file": "data/recovery_val.csv"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "dataset_name": "RecoverAI PaySim Financial Recovery Outcomes",
+  "version": "2.0",
+  "license": "PaySim Financial Mobile Money Benchmark",
+  "files": [
+    {
+      "file": "recovery_train.csv",
+      "rows": 300000,
+      "recovery_rate": 0.5090,
+      "actions": {
+        "smart_delay": 74896,
+        "silent_wait": 72641,
+        "notify_payment_link": 62433,
+        "payment_link": 54242,
+        "human_review": 35788
+      }
+    },
+    {
+      "file": "recovery_val.csv",
+      "rows": 60000,
+      "recovery_rate": 0.5100
+    }
+  ],
+  "feature_contract": {
+    "target": "recovered_within_72h",
+    "treatment": "treatment_action",
+    "num_features": 26
+  }
+}
