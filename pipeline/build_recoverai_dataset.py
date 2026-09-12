@@ -45,20 +45,28 @@ real_amounts = real_amounts[real_amounts > 0]
 real_amounts = real_amounts[real_amounts < 100_000]  # remove outliers
 print(f"  PaySim loaded: {len(real_amounts):,} real amount values")
 
-# Financial Transactions — merchant categories
+# Financial Transactions — merchant categories (optional fallback)
 txn_path = os.path.join(BASE, "financial_transactions", "transactions_data.csv")
-fin_txn = pd.read_csv(txn_path, usecols=["mcc"], nrows=100_000)
-real_mcc_codes = fin_txn["mcc"].dropna().astype(str).unique().tolist()[:50]
-print(f"  Financial Transactions loaded: {len(real_mcc_codes)} merchant categories")
+if os.path.exists(txn_path):
+    fin_txn = pd.read_csv(txn_path, usecols=["mcc"], nrows=100_000)
+    real_mcc_codes = fin_txn["mcc"].dropna().astype(str).unique().tolist()[:50]
+    print(f"  Financial Transactions loaded: {len(real_mcc_codes)} merchant categories")
+else:
+    print("  Financial Transactions dataset not found, using default merchant categories")
 
-# Cards data — for realistic card types
+# Cards data — for realistic card types (optional fallback)
 cards_path = os.path.join(BASE, "financial_transactions", "cards_data.csv")
-cards = pd.read_csv(cards_path, usecols=["card_type"], nrows=10_000)
-card_type_dist = cards["card_type"].value_counts(normalize=True)
-card_types = card_type_dist.index.tolist()[:4]
-card_probs  = card_type_dist.values[:4]
-card_probs  = card_probs / card_probs.sum()
-print(f"  Cards loaded: card types = {card_types}")
+if os.path.exists(cards_path):
+    cards = pd.read_csv(cards_path, usecols=["card_type"], nrows=10_000)
+    card_type_dist = cards["card_type"].value_counts(normalize=True)
+    card_types = card_type_dist.index.tolist()[:4]
+    card_probs  = card_type_dist.values[:4]
+    card_probs  = card_probs / card_probs.sum()
+    print(f"  Cards loaded: card types = {card_types}")
+else:
+    card_types = ["Visa", "Mastercard", "Rupay", "Amex"]
+    card_probs = [0.45, 0.35, 0.15, 0.05]
+    print(f"  Cards fallback loaded: card types = {card_types}")
 
 print("  Real data loaded successfully!")
 

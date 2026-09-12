@@ -1,10 +1,10 @@
 {
-  "accuracy": 0.7443,
-  "auc_roc": 0.8207,
-  "f1_score": 0.7408,
-  "precision": 0.7662,
-  "recall": 0.7169,
-  "best_iter": 163,
+  "accuracy": 0.744,
+  "auc_roc": 0.8208,
+  "f1_score": 0.7409,
+  "precision": 0.7651,
+  "recall": 0.7182,
+  "best_iter": 279,
   "train_rows": 300000,
   "val_rows": 60000,
   "features": 26
